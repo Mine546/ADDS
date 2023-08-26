@@ -9,13 +9,13 @@ using namespace std;
 
 std::vector<int> Finder::findSubstrings(std::string s1, std::string s2) {
     std::vector<int> result;
-
+    size_t foundPos=0;
 
     for (size_t i = 0; i < s2.size(); i++) {
-        if (size_t found-i>=0) {
-            found = s1.find(s2.substr(0,i+1), found-i);
+        if (foundPos-i>=0) {
+            size_t found = s1.find(s2.substr(0,i+1), found-i);
         } else {
-            found = s1.find(s2.substr(0,i+),found);
+            found = s1.find(s2.substr(0,i++),found);
         }
         if (found != std::string::npos) {
             result.push_back(found);
@@ -26,6 +26,7 @@ std::vector<int> Finder::findSubstrings(std::string s1, std::string s2) {
             }
             break;
         }
+        foundPos=found;
     }
     return result;
 }
