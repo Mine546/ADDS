@@ -18,7 +18,7 @@ std::vector<int> Finder::findSubstrings(std::string s1, std::string s2) {
             result.push_back(found);
             foundPos = found;
         } else {
-            for (int j=i-1;j<s2.size(); j++){
+            for (int j=i;j<s2.size(); j++){
                 result.push_back(-1);
             }
             break;
