@@ -1,0 +1,13 @@
+// RecursiveBinarySearch.h
+#ifndef RECURSIVEBINARYSEARCH_H
+#define RECURSIVEBINARYSEARCH_H
+#include <vector>
+
+class RecursiveBinarySearch {
+public:
+    bool search(const std::vector<int>& sorted_list, int target);
+private:
+    bool binarySearch(const std::vector<int>& sorted_list, int target, int start, int end);
+};
+
+#endif
