@@ -1,33 +1,33 @@
 #include "QuickSort.h"
 #include <iostream>
 
-std::vector<int> QuickSort::sort(std::vector<int> list)
-{
-    if (list.size() <= 2){
-        return list;
+std::vector<int> QuickSort::sort(std::vector<int> list) {
+    int n = list.size();
+
+    if (n <= 1) {
+        return list; // Base case: already sorted
     }
 
-    std::vector<int> part1, part2;
-    int end = list.size();
-    int pt = 2;
-    int pivot = list.at(pt);
+    int pivot = list[n / 2]; // Choose the middle element as the pivot
+    std::vector<int> left, equal, right;
 
-    for (int i = 0; i < end; i++)
-    {
-        if (i == pt){
-            continue;
+    for (int num : list) {
+        if (num < pivot) {
+            left.push_back(num);
+        } else if (num == pivot) {
+            equal.push_back(num);
+        } else {
+            right.push_back(num);
         }
-        if(list.at(i) < pivot){
-            part1.push_back(list.at(i));
-        } if (list.at(i) >= pivot) {
-            part2.push_back(list.at(i));
-        }
-    };
+    }
 
-    std::vector<int> left = sort(part1);
-    std::vector<int> right = sort(part2);
-    std::vector<int> result = left;
-    result.push_back(pivot);
-    result.insert(result.end(), right.begin(),right.end());
-    return result;
-};
+    // Recursively sort the left and right sublists
+    left = sort(left);
+    right = sort(right);
+
+    // Combine the sorted sublists and pivot
+    left.insert(left.end(), equal.begin(), equal.end());
+    left.insert(left.end(), right.begin(), right.end());
+
+    return left;
+}
