@@ -31,7 +31,7 @@ int main() {
     }
 
     std::cout<<std::endl;
-    
+
     sortedQuick = quickSort.sort(unsortedListB);
 
     target = 1; // Change this to the element you want to search for
@@ -48,6 +48,26 @@ int main() {
             std::cout << num << " ";
         }
     }
+
+    std::cout<<std::endl;
+
+    sortedQuick = quickSort.sort(unsortedListC);
+
+    target = 1; // Change this to the element you want to search for
+    found = binarySearch.search(sortedQuick, target);
+
+    if (found==1) {
+        std::cout << "true ";
+        for (int num : sortedQuick) {
+            std::cout << num << " ";
+        }
+    } else {
+        std::cout << "false ";
+        for (int num : sortedQuick) {
+            std::cout << num << " ";
+        }
+    }
+
 
     // Sort the list using BubbleSort
     BubbleSort bubbleSort;
