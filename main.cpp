@@ -10,7 +10,7 @@ int main() {
     std::vector<int> unsortedListB = {0, 3, 5, 4, -5, 100, 7777, 2014};
     std::vector<int> unsortedListC = {-5, -8, -4, -2, -1};
     std::vector<int> unsortedListD = {3,2,1};
-    std::vector<int> unsortedListE = {3,2};
+    std::vector<int> unsortedListE = {1,1,1,1,1};
     std::vector<int> unsortedListF = {1};
 
     // Sort the list using QuickSort
