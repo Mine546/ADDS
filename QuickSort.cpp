@@ -1,48 +1,33 @@
-// QuickSort.cpp
 #include "QuickSort.h"
+#include <iostream>
 
-std::vector<int> QuickSort::sort(std::vector<int> list) {
-    int low = 0;
-    int high = list.size() - 1;
-
-    quicksort(list, low, high);
-
-    return list;
-}
-
-void QuickSort::quicksort(std::vector<int>& list, int low, int high) {
-    if (low < high) {
-        int pivot_index = partition(list, low, high);
-        quicksort(list, low, pivot_index - 1);
-        quicksort(list, pivot_index + 1, high);
+std::vector<int> QuickSort::sort(std::vector<int> list)
+{
+    if (list.size() <= 2){
+        return list;
     }
-}
 
-int QuickSort::partition(std::vector<int>& list, int low, int high) {
-    // Select the pivot element (third element)
-    int pivot = list[low + 2]; // Using the third element as the pivot
+    std::vector<int> part1, part2;
+    int end = list.size();
+    int pt = 2;
+    int pivot = list.at(pt);
 
-    // Initialize pointers
-    int i = low - 1;
-    int j = high + 1;
-
-    while (true) {
-        // Find an element greater than or equal to the pivot from the left
-        do {
-            i++;
-        } while (list[i] < pivot);
-
-        // Find an element less than or equal to the pivot from the right
-        do {
-            j--;
-        } while (list[j] > pivot);
-
-        // If the pointers meet or cross, the partitioning is complete
-        if (i >= j) {
-            return j;
+    for (int i = 0; i < end; i++)
+    {
+        if (i == pt){
+            continue;
         }
+        if(list.at(i) < pivot){
+            part1.push_back(list.at(i));
+        } if (list.at(i) >= pivot) {
+            part2.push_back(list.at(i));
+        }
+    };
 
-        // Swap list[i] and list[j]
-        std::swap(list[i], list[j]);
-    }
-}
+    std::vector<int> left = sort(part1);
+    std::vector<int> right = sort(part2);
+    std::vector<int> result = left;
+    result.push_back(pivot);
+    result.insert(result.end(), right.begin(),right.end());
+    return result;
+};
