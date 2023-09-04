@@ -8,6 +8,7 @@ int main() {
     // Create an unsorted list of integers
     std::vector<int> unsortedListA = {1, 3, 5, 4, -5, 100, 7777, 2014};
     std::vector<int> unsortedListB = {0, 3, 5, 4, -5, 100, 7777, 2014};
+    std::vector<int> unsortedListC = {-5, -8, -4, -2, -1};
     // Sort the list using QuickSort
     QuickSort quickSort;
     std::vector<int> sortedQuick = quickSort.sort(unsortedListA);
@@ -29,6 +30,8 @@ int main() {
         }
     }
 
+    std::cout<<std::endl;
+    
     sortedQuick = quickSort.sort(unsortedListB);
 
     target = 1; // Change this to the element you want to search for
