@@ -9,6 +9,7 @@ int main() {
     std::vector<int> unsortedListA = {1, 3, 5, 4, -5, 100, 7777, 2014, 0};
     std::vector<int> unsortedListB = {0, 3, 5, 4, -5, 100, 7777, 2014};
     std::vector<int> unsortedListC = {-5, -8, -4, -2, -1};
+    std::vector<int> unsortedListD = {3,2,1};
     // Sort the list using QuickSort
     QuickSort quickSort;
     std::vector<int> sortedQuick = quickSort.sort(unsortedListA);
@@ -34,7 +35,7 @@ int main() {
 
     sortedQuick = quickSort.sort(unsortedListB);
 
-    target = 1; // Change this to the element you want to search for
+
     found = binarySearch.search(sortedQuick, target);
 
     if (found==1) {
@@ -55,7 +56,7 @@ int main() {
     BubbleSort bubbleSort;
     sortedQuick = bubbleSort.sort(unsortedListC);
 
-    target = 1; // Change this to the element you want to search for
+
     found = binarySearch.search(sortedQuick, target);
 
     if (found==1) {
@@ -73,6 +74,25 @@ int main() {
 
     std::cout<<std::endl;
 
+
+    sortedQuick = quickSort.sort(unsortedListD);
+
+
+    found = binarySearch.search(sortedQuick, target);
+
+    if (found==1) {
+        std::cout << "true ";
+        for (int num : sortedQuick) {
+            std::cout << num << " ";
+        }
+    } else {
+        std::cout << "false ";
+        for (int num : sortedQuick) {
+            std::cout << num << " ";
+        }
+    }
+
+    std::cout<<std::endl;
 
     return 0;
 }
