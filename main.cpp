@@ -50,7 +50,7 @@ int main() {
     }
 
     std::cout<<std::endl;
-    
+
     // Sort the list using BubbleSort
     BubbleSort bubbleSort;
     sortedQuick = bubbleSort.sort(unsortedListC);
@@ -71,7 +71,7 @@ int main() {
     }
 
 
-
+    std::cout<<std::endl;
 
 
     return 0;
