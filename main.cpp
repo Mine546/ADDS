@@ -6,8 +6,8 @@
 
 int main() {
     // Create an unsorted list of integers
-    std::vector<int> unsortedListA = {1, 3, 5, 4, -5, 100, 7777, 2014, 0};
-
+    std::vector<int> unsortedListA = {1, 3, 5, 4, -5, 100, 7777, 2014};
+    std::vector<int> unsortedListB = {0, 3, 5, 4, -5, 100, 7777, 2014};
     // Sort the list using QuickSort
     QuickSort quickSort;
     std::vector<int> sortedQuick = quickSort.sort(unsortedListA);
@@ -19,31 +19,36 @@ int main() {
 
     if (found==1) {
         std::cout << "true ";
+        for (int num : sortedQuick) {
+            std::cout << num << " ";
+        }
     } else {
-        std::cout << "Element " << target << " not found in the sorted list." << std::endl;
+        std::cout << "false ";
+        for (int num : sortedQuick) {
+            std::cout << num << " ";
+        }
     }
 
-    for (int num : sortedQuick) {
-        std::cout << num << " ";
+    sortedQuick = quickSort.sort(unsortedListB);
+
+    target = 1; // Change this to the element you want to search for
+    found = binarySearch.search(sortedQuick, target);
+
+    if (found==1) {
+        std::cout << "true ";
+        for (int num : sortedQuick) {
+            std::cout << num << " ";
+        }
+    } else {
+        std::cout << "false ";
+        for (int num : sortedQuick) {
+            std::cout << num << " ";
+        }
     }
-    std::cout << std::endl;
 
     // Sort the list using BubbleSort
     BubbleSort bubbleSort;
     std::vector<int> sortedBubble = bubbleSort.sort(unsortedListA);
-
-
-
-
-    for (int num : sortedBubble) {
-        std::cout << num << " ";
-    }
-    std::cout << std::endl;
-
-
-
-
-
 
 
     return 0;
