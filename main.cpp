@@ -50,8 +50,10 @@ int main() {
     }
 
     std::cout<<std::endl;
-
-    sortedQuick = quickSort.sort(unsortedListC);
+    
+    // Sort the list using BubbleSort
+    BubbleSort bubbleSort;
+    sortedQuick = bubbleSort.sort(unsortedListC);
 
     target = 1; // Change this to the element you want to search for
     found = binarySearch.search(sortedQuick, target);
@@ -69,9 +71,7 @@ int main() {
     }
 
 
-    // Sort the list using BubbleSort
-    BubbleSort bubbleSort;
-    std::vector<int> sortedBubble = bubbleSort.sort(unsortedListA);
+
 
 
     return 0;
