@@ -3,13 +3,13 @@
 
 std::vector<int> QuickSort::sort(std::vector<int> list)
 {
-    if (list.size() <= 2){
+    if (list.size() <= 3){
         return list;
     }
 
     std::vector<int> part1, part2;
     int end = list.size();
-    int pt = 2;
+    int pt = 3;
     int pivot = list.at(pt);
 
     for (int i = 0; i < end; i++)
