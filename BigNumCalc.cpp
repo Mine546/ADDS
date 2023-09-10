@@ -88,12 +88,31 @@ std::list<int> BigNumCalc::mul(const std::list<int>& num1, const std::list<int>&
     }
 
     int num2Digit = num2.back();
-    std::list<int> num2Copy = num2; // Make a copy of num2
-    num2Copy.pop_back();
 
-    std::list<int> partialResult = mul(num1, num2Copy); // Use the copy for recursion
-    for (int i = 0; i < num2Digit; ++i) {
-        result = add(result, partialResult);
+    // Ensure num2 is a single-digit number
+    if (num2.size() > 1 || num2Digit < 0 || num2Digit > 9) {
+        result.push_back(0);  // Invalid input, return zero
+        return result;
+    }
+
+    // Initialize the result with zeros
+    result.assign(num1.size(), 0);
+
+    int carry = 0;
+    int multiplier = num2Digit;
+    auto it1 = num1.rbegin();
+    auto it3 = result.rbegin();
+
+    while (it1 != num1.rend()) {
+        int product = carry + (*it1) * multiplier;
+        carry = product / 10;
+        *it3 = product % 10;
+        ++it1;
+        ++it3;
+    }
+
+    if (carry > 0) {
+        result.push_front(carry);
     }
 
     removeLeadingZeros(result);
