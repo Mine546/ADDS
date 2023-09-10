@@ -67,26 +67,14 @@ std::list<int> BigNumCalc::sub(const std::list<int>& num1, const std::list<int>&
     return result;
 }
 
-std::list<int> BigNumCalc::mul(const std::list<int>& num1, int num2) {
+std::list<int> bigNumCalc::mul(const std::list<int>& num1, const std::list<int>& num2) {
     std::list<int> result;
-    int carry = 0;
+    std::list<int> tempResult;
 
-    if (num2 == 0) {
-        return buildBigNum("0");
-    }
-
-    auto it1 = num1.rbegin();
-
-    while (it1 != num1.rend() || carry) {
-        int product = carry;
-        if (it1 != num1.rend()) {
-            product += (*it1) * num2;
-            ++it1;
-        }
-
-        carry = product / 10;
-        product %= 10;
-        result.push_front(product);
+    for (auto it2 = num2.rbegin(); it2 != num2.rend(); ++it2) {
+        tempResult = mul(num1, *it2);
+        tempResult.insert(tempResult.end(), std::distance(it2, num2.rend()) - 1, 0);
+        result = add(result, tempResult);
     }
 
     removeLeadingZeros(result);
