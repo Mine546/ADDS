@@ -95,6 +95,12 @@ std::list<int> BigNumCalc::mul(const std::list<int>& num1, const std::list<int>&
         return result;
     }
 
+    // Check if either num1 or num2 is 0
+    if (num2Digit == 0) {
+        result.push_back(0);
+        return result;
+    }
+    
     // Initialize the result with zeros
     result.assign(num1.size(), 0);
 
@@ -118,6 +124,8 @@ std::list<int> BigNumCalc::mul(const std::list<int>& num1, const std::list<int>&
     removeLeadingZeros(result);
     return result;
 }
+
+
 
 
 void BigNumCalc::removeLeadingZeros(std::list<int>& num) {
