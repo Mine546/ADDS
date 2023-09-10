@@ -1,6 +1,6 @@
-#include "BigNumCalc.h"
+#include "bigNumCalc.h"
 
-std::list<int> BigNumCalc::buildBigNum(const std::string& numString) {
+std::list<int> bigNumCalc::buildBigNum(const std::string& numString) {
     std::list<int> result;
     for (char c : numString) {
         if (std::isdigit(c)) {
@@ -10,7 +10,7 @@ std::list<int> BigNumCalc::buildBigNum(const std::string& numString) {
     return result;
 }
 
-std::list<int> BigNumCalc::add(const std::list<int>& num1, const std::list<int>& num2) {
+std::list<int> bigNumCalc::add(const std::list<int>& num1, const std::list<int>& num2) {
     std::list<int> result;
     int carry = 0;
     auto it1 = num1.rbegin();
@@ -36,7 +36,7 @@ std::list<int> BigNumCalc::add(const std::list<int>& num1, const std::list<int>&
     return result;
 }
 
-std::list<int> BigNumCalc::sub(const std::list<int>& num1, const std::list<int>& num2) {
+std::list<int> bigNumCalc::sub(const std::list<int>& num1, const std::list<int>& num2) {
     std::list<int> result;
     int borrow = 0;
     auto it1 = num1.rbegin();
@@ -59,7 +59,7 @@ std::list<int> BigNumCalc::sub(const std::list<int>& num1, const std::list<int>&
         } else {
             borrow = 0;
         }
-
+        
         result.push_front(x);
     }
 
@@ -67,21 +67,33 @@ std::list<int> BigNumCalc::sub(const std::list<int>& num1, const std::list<int>&
     return result;
 }
 
-std::list<int> bigNumCalc::mul(const std::list<int>& num1, const std::list<int>& num2) {
+std::list<int> bigNumCalc::mul(const std::list<int>& num1, int num2) {
     std::list<int> result;
-    std::list<int> tempResult;
+    int carry = 0;
 
-    for (auto it2 = num2.rbegin(); it2 != num2.rend(); ++it2) {
-        tempResult = mul(num1, *it2);
-        tempResult.insert(tempResult.end(), std::distance(it2, num2.rend()) - 1, 0);
-        result = add(result, tempResult);
+    if (num2 == 0) {
+        return buildBigNum("0");
+    }
+
+    auto it1 = num1.rbegin();
+
+    while (it1 != num1.rend() || carry) {
+        int product = carry;
+        if (it1 != num1.rend()) {
+            product += (*it1) * num2;
+            ++it1;
+        }
+
+        carry = product / 10;
+        product %= 10;
+        result.push_front(product);
     }
 
     removeLeadingZeros(result);
     return result;
 }
 
-void BigNumCalc::removeLeadingZeros(std::list<int>& num) {
+void bigNumCalc::removeLeadingZeros(std::list<int>& num) {
     while (!num.empty() && num.front() == 0) {
         num.pop_front();
     }
