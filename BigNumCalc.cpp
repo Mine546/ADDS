@@ -1,16 +1,28 @@
-#include "bigNumCalc.h"
+#include "BigNumCalc.h"
 
-std::list<int> bigNumCalc::buildBigNum(const std::string& numString) {
+std::list<int> BigNumCalc::buildBigNum(const std::string& numString) {
     std::list<int> result;
+    bool leadingZeros = true;
+
     for (char c : numString) {
         if (std::isdigit(c)) {
-            result.push_back(c - '0');
+            if (c != '0') {
+                leadingZeros = false;
+            }
+            if (!leadingZeros) {
+                result.push_back(c - '0');
+            }
         }
     }
+
+    if (result.empty()) {
+        result.push_back(0);  // Ensure at least one digit for zero.
+    }
+
     return result;
 }
 
-std::list<int> bigNumCalc::add(const std::list<int>& num1, const std::list<int>& num2) {
+std::list<int> BigNumCalc::add(const std::list<int>& num1, const std::list<int>& num2) {
     std::list<int> result;
     int carry = 0;
     auto it1 = num1.rbegin();
@@ -36,7 +48,7 @@ std::list<int> bigNumCalc::add(const std::list<int>& num1, const std::list<int>&
     return result;
 }
 
-std::list<int> bigNumCalc::sub(const std::list<int>& num1, const std::list<int>& num2) {
+std::list<int> BigNumCalc::sub(const std::list<int>& num1, const std::list<int>& num2) {
     std::list<int> result;
     int borrow = 0;
     auto it1 = num1.rbegin();
@@ -59,7 +71,7 @@ std::list<int> bigNumCalc::sub(const std::list<int>& num1, const std::list<int>&
         } else {
             borrow = 0;
         }
-        
+
         result.push_front(x);
     }
 
@@ -67,33 +79,29 @@ std::list<int> bigNumCalc::sub(const std::list<int>& num1, const std::list<int>&
     return result;
 }
 
-std::list<int> bigNumCalc::mul(const std::list<int>& num1, int num2) {
+std::list<int> BigNumCalc::mul(const std::list<int>& num1, const std::list<int>& num2) {
     std::list<int> result;
-    int carry = 0;
 
-    if (num2 == 0) {
-        return buildBigNum("0");
+    if (num1.empty() || num2.empty()) {
+        result.push_back(0);  // Product of empty lists is zero.
+        return result;
     }
 
-    auto it1 = num1.rbegin();
+    int num2Digit = num2.back();
+    std::list<int> num2Copy = num2; // Make a copy of num2
+    num2Copy.pop_back();
 
-    while (it1 != num1.rend() || carry) {
-        int product = carry;
-        if (it1 != num1.rend()) {
-            product += (*it1) * num2;
-            ++it1;
-        }
-
-        carry = product / 10;
-        product %= 10;
-        result.push_front(product);
+    std::list<int> partialResult = mul(num1, num2Copy); // Use the copy for recursion
+    for (int i = 0; i < num2Digit; ++i) {
+        result = add(result, partialResult);
     }
 
     removeLeadingZeros(result);
     return result;
 }
 
-void bigNumCalc::removeLeadingZeros(std::list<int>& num) {
+
+void BigNumCalc::removeLeadingZeros(std::list<int>& num) {
     while (!num.empty() && num.front() == 0) {
         num.pop_front();
     }
