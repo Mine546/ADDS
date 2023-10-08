@@ -1,4 +1,3 @@
-// Trie.cpp
 #include "Trie.h"
 
 TrieNode::TrieNode() : isEndOfWord(false) {}
