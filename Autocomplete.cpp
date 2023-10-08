@@ -1,4 +1,3 @@
-// Autocomplete.cpp
 #include "Autocomplete.h"
 
 void Autocomplete::insert(const std::string& word) {
